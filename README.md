@@ -11,9 +11,9 @@ We present here:
 - A tutorial to run [R-INLA](http://www.r-inla.org/) on galaxy maps, 
 -  A full catalog of INLA reconstruted mpas of mass, metallicity, age and extinction obtained with [STARLIGHT](http://www.starlight.ufsc.br/) from the [CALIFA](http://califa.caha.es/) and [PISCO](http://adsabs.harvard.edu/abs/2018arXiv180201589G) surveys. 
 
-### *Short Tutorial to reproduce the maps* 
+### *Code snipppet to reproduce the spatial maps* 
 
-Available at [tutorial](https://github.com/emilleishida/coinCF2017_INLA/tutorial) , the tutorial is written in R-markdown and shows how to read a spatial map, run R-INLA and plot some basic outputs.
+We provide a simple  [example](https://github.com/emilleishida/coinCF2017_INLA/tutorial) to read the data, perform the INLA analysis and display the results.
 
 
 ### CALIFA/PISCO Galactic Property Catalogue 
@@ -22,7 +22,7 @@ The current release consists of 667 nearby galaxies from CALIFA and 104 galaxies
 
 Data structure:
 
-A) A single table [file](https://github.com/emilleishida/coinCF2017_INLA/loopdata/allgalaxies.dat) with format of 21 columns:
+A) A single table [file](https://github.com/emilleishida/coinCF2017_INLA/loopdata/allgalaxies.dat) composed by 21 columns:
 
 1. GALAXY NAME
 2. x position in pixels
