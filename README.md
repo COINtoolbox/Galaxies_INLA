@@ -9,7 +9,7 @@ This is one of the products of the fourth edition of the [COIN Residence Program
 We present here: 
 
 - A tutorial to run [R-INLA](http://www.r-inla.org/) on galaxy maps, 
--  A full catalog of INLA reconstruted mpas of mass, metallicity, age and extinction obtained with [STARLIGHT](http://www.starlight.ufsc.br/) from the [CALIFA](http://califa.caha.es/) and [PISCO](http://adsabs.harvard.edu/abs/2018arXiv180201589G) surveys. 
+-  A full catalog of INLA reconstruted maps of mass, metallicity, age and extinction obtained with [STARLIGHT](http://www.starlight.ufsc.br/) from the [CALIFA](http://califa.caha.es/) and [PISCO](http://adsabs.harvard.edu/abs/2018arXiv180201589G) surveys. 
 
 ### *Code snipppet to reproduce the spatial maps* 
 
