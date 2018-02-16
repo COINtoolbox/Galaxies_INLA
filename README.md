@@ -13,7 +13,7 @@ We present here:
 
 ### *Code snipppet to reproduce the spatial maps* 
 
-We provide a simple  [example](https://github.com/emilleishida/coinCF2017_INLA/tutorial) to read the data, perform the INLA analysis and display the results.
+We provide a simple  [example](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/Run_INLA.R) to read the data, perform the INLA analysis and display the results.
 
 
 ### CALIFA/PISCO Galactic Property Catalogue 
