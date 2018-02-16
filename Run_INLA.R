@@ -1,8 +1,8 @@
 # Loads necessary R libraries and scripts: 'inla_fct.R':
-library(INLA)
+require(INLA)
 require(lattice)
 require(classInt)
-library(FITSio)
+require(FITSio)
 source("inla_fct.R")
 
 
