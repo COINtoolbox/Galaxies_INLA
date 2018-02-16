@@ -22,7 +22,7 @@ The current release consists of 667 nearby galaxies from CALIFA and 104 galaxies
 
 Data structure:
 
-A) A single table (divided in 15 files) [file](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/allgalaxies1.dat.gz) composed of 21 columns:
+A) A single table (divided in 15 [files](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/allgalaxies1.dat.gz)) composed of 21 columns:
 
 1. GALAXY NAME
 2. x position in pixels
