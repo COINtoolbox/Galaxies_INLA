@@ -22,7 +22,7 @@ The current release consists of 667 nearby galaxies from CALIFA and 104 galaxies
 
 Data structure:
 
-A) A single table (divided in 15 files) [file](https://github.com/COINtoolbox/Galaxies_INLA/data/allgalaxies1.dat.gz) composed of 21 columns:
+A) A single table (divided in 15 files) [file](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/allgalaxies1.dat.gz) composed of 21 columns:
 
 1. GALAXY NAME
 2. x position in pixels
@@ -46,6 +46,6 @@ A) A single table (divided in 15 files) [file](https://github.com/COINtoolbox/Ga
 20. INLA mean of visual extinction Av
 21. INLA std deviation of visual extinction Av
 
-B) One invidual FITS files per galaxy for all 6 STARLIGHT properties, e.g. [NGC-309](https://github.com/COINtoolbox/Galaxies_INLA/data/fits/NGC0309_starlight.fits), and another indiviudal FITS file per galaxy for the respective INLA mean and dispersion, e.g. [NGC-741](https://github.com/COINtoolbox/Galaxies_INLA/data/fits/NGC0741_inla.fits). Additionally, 6 png figures are included per galaxy showing input STARLIGHT map and respective INLA mean/standard deviation, e.g. [mass of NGC-309](https://github.com/COINtoolbox/Galaxies_INLA/data/plots/NGC0309_mass.png) or [Av of NGC-741]((https://github.com/COINtoolbox/Galaxies_INLA/data/plots/NGC0309_Av.png)).
+B) One invidual FITS files per galaxy for all 6 STARLIGHT properties, e.g. [NGC-309](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/fits/NGC0309_starlight.fits), and another indiviudal FITS file per galaxy for the respective INLA mean and dispersion, e.g. [NGC-741](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/fits/NGC0741_inla.fits). Additionally, 6 png figures are included per galaxy showing input STARLIGHT map and respective INLA mean/standard deviation, e.g. [mass of NGC-309](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/plots/NGC0309_mass.png) or [Av of NGC-741]((https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/plots/NGC0309_Av.png)).
 
 Comments: We note that all galaxies were modeled in the same way and with the same input parameters to R-INLA. For optimum performance however, the user may consider adapting the INLA model to the specific needs of the given problem. We point out for instance that several galaxies have foreground stars for which STARLIGHT erroneously assigns large stellar masses and other properties. These pixels should be removed by the user prior to the INLA reconstruction (or STARLIGHT fit). One such example is KUG 0210-078.
