@@ -1,19 +1,5 @@
 
 
-### METRIC MEASUREMENT
-residualCalculate <- function(mod,obs,ermod){
- mean <- mean(NaRV.omit((as.vector(mod)-as.vector(obs))^2/(as.vector(ermod))^2))
- median <- median(NaRV.omit((as.vector(mod)-as.vector(obs))^2/(as.vector(ermod))^2))
- std <- sd(NaRV.omit((as.vector(mod)-as.vector(obs))^2/(as.vector(ermod))^2))
- mad <- mad(NaRV.omit((as.vector(mod)-as.vector(obs))^2/(as.vector(ermod))^2))
- emean <- mean(NaRV.omit((as.vector(mod)-as.vector(obs))^2))
- emedian <- median(NaRV.omit((as.vector(mod)-as.vector(obs))^2))
- estd <- sd(NaRV.omit((as.vector(mod)-as.vector(obs))^2))
- emad <- mad(NaRV.omit((as.vector(mod)-as.vector(obs))^2))
- return(list(mean=mean,median=median,std=std,mad=mad,
-             emean=emean,emedian=emedian,estd=estd,emad=emad))
-}
-
 ## RESHAPE IMAGE WHEN ZOOM SET
 zoom_fix <- function(img,zoom){
     mim <- melt(img)
@@ -27,7 +13,7 @@ zoom_fix <- function(img,zoom){
 
 
 ## -------- 1) FUNCTION FOR STATIONARY FITS
-stationary_inla <- function(tx, ty, tpar, tepar, weight=1, name='age',  zoom = 1,
+stationary_inla <- function(tx, ty, tpar, tepar, weight=1, zoom = 1,
                             xsize=77,ysize=72,shape='ellipse',
                             p_range=c(2,0.2),p_sigma=c(2,0.2),cutoff=5){
 
@@ -111,9 +97,7 @@ else if(shape=='ellipse') {
                     data=inla.stack.data(stk_ell),
                     control.predictor=list(A=inla.stack.A(stk_ell)),scale=epar)
 
-    #print restuls
-    #print(res_rad$summary.fix)
-
+  
     #prjection for ellipse
     px = rep(projection$x,each=length(projection$y))
     py = rep(projection$y,length(projection$x))
@@ -156,14 +140,12 @@ if (hasArg(tepar)) {
 }
     
 
-#sanity check (projected age compared to observed age as a funciton of age_error (should increase))
-#plot(age_error,as.numeric(A%*%res$summary.random$i$mean)-age)
     return(list(out=output, image=timage, erimage=terrimage,outsd=outputsd))
 }
 
 
 ### ----------- 2) FUNCTION FOR NON-STATIONARY FITS
-nonstationary_inla <- function(tx, ty, tpar, tepar, weight=1, name='age',zoom=1,
+nonstationary_inla <- function(tx, ty, tpar, tepar, weight=1, zoom=1,
                         xsize=77,ysize=72,cutoff=5,nbasis=2,degree=2,shape='ellipse'){
 
 x <- tx
@@ -186,7 +168,7 @@ spde <- inla.spde2.matern(mesh=mesh, alpha=2,
 B.tau=cbind(0,basis.T,basis.K*0),B.kappa=cbind(0,basis.T*0,basis.K/2))
 
 #calculate projection from model
-projection <- inla.mesh.projector(mesh,xlim=c(0,xsize),ylim=c(0,ysize),dim=c(xsize+1,ysize+1))
+projection <- inla.mesh.projector(mesh,xlim=c(0,xsize),ylim=c(0,ysize),dim=zoom*c(xsize+1,ysize+1))
     
 #center
 xcenter <- sum(x*weight)/sum(weight)
@@ -214,14 +196,14 @@ if(shape == 'radius'){
 
     #output
     output <- inla.mesh.project(inla.mesh.projector(mesh,
-	   xlim=c(0,xsize),ylim=c(0,ysize),dim=c(xsize+1,ysize+1)),res_rad$summary.random$i$mean)+
+	   xlim=c(0,ysize),ylim=c(0,xsize),dim=zoom*c(ysize+1,xsize+1)),res_rad$summary.random$i$mean)+
 	   t(matrix(as.numeric(res_rad$summary.fixed$mean[1]+
 	   res_rad$summary.fixed$mean[2]*projected_radius+
-	   res_rad$summary.fixed$mean[3]*projected_radius_2),nrow=ysize+1,ncol=xsize+1))
+	   res_rad$summary.fixed$mean[3]*projected_radius_2),nrow=zoom*(xsize+1),ncol=zoom*(ysize+1)))
 
     #output std with simple (no function)
-    outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(0,xsize),
-                  ylim=c(0,ysize),dim=c(xsize+1,ysize+1)),res_rad$summary.random$i$sd)
+    outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(0,ysize),
+                  ylim=c(0,xsize),dim=zoom*c(ysize+1,xsize+1)),res_rad$summary.random$i$sd)
 
 #ellipse fct
 }
@@ -252,13 +234,13 @@ else if(shape=='ellipse') {
 
     #output
     output <- inla.mesh.project(inla.mesh.projector(mesh,
-	   xlim=c(0,xsize),ylim=c(0,ysize),dim=c(xsize+1,ysize+1)),res_ell$summary.random$i$mean)+
+	   xlim=c(0,ysize),ylim=c(0,xsize),dim=zoom*c(ysize+1,xsize+1)),res_ell$summary.random$i$mean)+
 	   t(matrix(as.numeric(res_ell$summary.fixed$mean[1]+
 	   res_ell$summary.fixed$mean[2]*projected_ellipse+
-	   res_ell$summary.fixed$mean[3]*projected_ellipse_2),nrow=ysize+1,ncol=xsize+1))
+	   res_ell$summary.fixed$mean[3]*projected_ellipse_2),nrow=zoom*(xsize+1),ncol=zoom*(ysize+1)))
 
     #output std with simple (no function)
-    outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(0,xsize),ylim=c(0,ysize),dim=c(xsize+1,ysize+1)),res_ell$summary.random$i$sd)
+    outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(0,ysize),ylim=c(0,xsize),dim=zoom*c(ysize+1,xsize+1)),res_ell$summary.random$i$sd)
 }
 
 #zoom    
@@ -282,35 +264,31 @@ return(list(out=output, image=timage, erimage=terrimage, outsd=outputsd))
 }
 
 #### --------------- 3) NON-PARAMETRIC FUNCTION
-##Instead of predicting ourselves, we can pass a larger array with NA values that will be automatically predicted
 
-nonparametric_inla <- function(tx, ty, tpar, tepar, weight=1, name='age',xsize=77,ysize=70){
+nonparametric_inla <- function(tx, ty, tpar, tepar, weight=1, xsize=77,ysize=70,cutoff=5){
 
 tweight <- weight
+x <- tx
+y <- ty
+par <- tpar
+if (hasArg(tepar)) { epar <- tepar^2 } else { epar <- NULL}
 
-#valid data
-valid <- which(!(tpar <= 0) & !(tepar <= 0) & !(tepar == "NaN") & !(tweight <=0))
-x <- c(tx[valid],rep(1:(xsize+1),each=(ysize+1)))
-y <- c(ty[valid],rep(1:(ysize+1),xsize+1))
-par <- c(tpar[valid],rep(NA,length=((xsize+1)*(ysize+1))))
-epar <- c(tepar[valid],rep(NA,length=((xsize+1)*(ysize+1))))
-weight <- c(tweight[valid],rep(NA,length=((xsize+1)*(ysize+1))))
-
-#radius fct
-xcenter <- sum(x[1:length(valid)]*weight[1:length(valid)])/sum(weight[1:length(valid)])
-ycenter <- sum(y[1:length(valid)]*weight[1:length(valid)])/sum(weight[1:length(valid)])
-radius <- sqrt((x-xcenter)^2 + (y-ycenter)^2)
-radius_2 <- (x-xcenter)^2 + (y-ycenter)^2
-
-#ellipse fct
-covar <- cov.wt(cbind(x[1:length(valid)],y[1:length(valid)]), w=weight[1:length(valid)])
-eigens <- eigen(covar$cov)
-ellipse <- (cbind(x-xcenter,y-ycenter)%*%(eigens$vectors[,1]))^2/eigens$values[1] +(cbind(x-xcenter,y-ycenter)%*%(eigens$vectors[,2]))^2/eigens$values[2]
-ellipse_2 =  ellipse^2
-
-mesh <- inla.mesh.2d(cbind(x,y), max.n = 10, cutoff = 5)
+##create a mesh    
+mesh <- inla.mesh.2d(cbind(x,y), max.n = 10, cutoff = cutoff)
 
 A <- inla.spde.make.A(mesh, loc=cbind(x,y))
+   
+#center
+xcenter <- sum(x*weight)/sum(weight)
+ycenter <- sum(y*weight)/sum(weight)
+
+#ellipse fct
+covar <- cov.wt(cbind(x,y),w=weight)
+eigens <- eigen(covar$cov)
+ellipse <- (cbind(x-xcenter,y-ycenter)%*%(eigens$vectors[,1]))^2/eigens$values[1] +
+    (cbind(x-xcenter,y-ycenter)%*%(eigens$vectors[,2]))^2/eigens$values[2]
+ellipse_2 =  ellipse^2
+
 
 #inverse scale
 basis.T <- inla.mesh.basis(mesh,type="b.spline", n=2, degree=2)
@@ -332,56 +310,25 @@ control.predictor=list(A=inla.stack.A(stk),compute=TRUE),scale=epar^2,quantiles=
 #output <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(0,xsize),ylim=c(0,ysize),
 #       dim=c(xsize+1,ysize+1)),t(matrix(as.numeric(res$summary.fitted.values$mean[(length(#valid)+1):length(x)]),nrow=ysize+1,ncol=xsize+1)))
 
-output <- t(matrix(as.numeric(res$summary.fitted.values$mean[(length(valid)+1):length(x)]),nrow=ysize+1,ncol=xsize+1))
-
+output <- t(matrix(as.numeric(res$summary.fitted.values$mean),nrow=xsize+1,ncol=ysize+1))
+outputsd <- t(matrix(as.numeric(res$summary.fitted.values$sd),nrow=xsize+1,ncol=ysize+1))
 
 
 ##chec radial nonpar fct
-plot(res$summary.random$i$ID,res$summary.random$i$mean)
+#plot(res$summary.random$i$ID,res$summary.random$i$mean)
 
 
 #original data to compare
 timage <- matrix(NA,nrow=ysize+1,ncol=xsize+1)
-for (i in 1:length(valid)) {timage[x[i],y[i]] <- par[i]}
-terrimage <- matrix(NA,nrow=ysize+1,ncol=xsize+1)
-for (i in 1:length(valid)) {terrimage[x[i],y[i]] <- epar[i]}
+for (i in 1:length(x)) {timage[x[i],y[i]] <- par[i]}
+terrimage = NULL
+if (hasArg(tepar)) {
+    terrimage <- matrix(NA,nrow=ysize+1,ncol=xsize+1)
+    for (i in 1:length(x)) {terrimage[x[i],y[i]] <- epar[i]}
+}
+    
+return(list(out=output, image=timage, erimage=terrimage,outsd=outputsd))
 
 
-name='NGC2906-age-0.05'
-ra=range(par[1:length(valid)])
-png(filename=paste(name,'INLA_nonparametric.png',sep='_'))
-par(mfrow=c(2,1))
-image(timage,col=hsv(100:1/100*0.6),zlim=ra)
-title(name)
-image(output,col=hsv(100:1/100*0.6),zlim=ra)
-title(paste(name,'INLA:ELLIPSE',sep='_'))
-dev.off()
 }
 
-
-
-### QUICK AND DIRTY INTERPOLATION FROM ALBERTO
-
-quickAndDirtyKrigforInterpolation2 <- function(x, y, z, zlab="Log(Age)") {
- require(fields)
- fit <- Krig(data.frame(x, y), z, theta=20)
- summary(fit)
- # Some diagnostic plots
- #set.panel(2,2)
- #plot(fit)
- quartz()
- surface( fit, type="I", extrap=FALSE, nx=200, ny=200, main=paste(zlab, "\n Simple GRSP Kriging"), zlab=zlab, col=terrain.colors(256), asp=1)
- points( fit$x, pch=19, cex=0.2 )
- return(fit)
-}
-quickAndDirtyKrigforInterpolationErrorPlot <- function(fit, zlab="Log(Age)") {
- quartz()
- sdSurface <- predictSurfaceSE(fit, extrap=FALSE)
- surface( sdSurface, type="I", extrap=FALSE, nx=200, ny=200, main=paste(zlab, "\n Simple GRSP Kriging Error Estimate"), col=terrain.colors(256), zlab=zlab, asp=1)
- points( fit$x, pch=19, cex=0.2 )
-}
-
-quickAndDirtyKrigforInterpolationWithErrorEstimate <- function(x, y, z, zlab="Log(Age)") {
- res <- quickAndDirtyKrigforInterpolation2(x, y, z, zlab=zlab)
- quickAndDirtyKrigforInterpolationErrorPlot(res, zlab=zlab)
-}
