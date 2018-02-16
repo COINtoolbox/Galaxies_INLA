@@ -1,4 +1,4 @@
-# Resolved maps of galaxy properties via Bayesian spatial models<img  align="right" src="https://raw.githubusercontent.com/COINtoolbox/photoz_catalogues/master/images/coin.png" width="200">
+# Spatial field reconstruction via Integrated Nested Laplace Appoximation: Application to IFU galaxy data<img  align="right" src="https://raw.githubusercontent.com/COINtoolbox/photoz_catalogues/master/images/coin.png" width="200">
 
 
 S. Gonzalez-Gaitan, [R. S. de Souza](https://github.com/RafaelSdeSouza), [A. Krone-Martins](https://github.com/algolkm), E. Cameron, P. Coelho, L. Galbany
