@@ -1,10 +1,10 @@
-# Spatial field reconstruction via Integrated Nested Laplace Appoximation: Application to IFU galaxy data<img  align="right" src="https://raw.githubusercontent.com/COINtoolbox/photoz_catalogues/master/images/coin.png" width="200">
+# Spatial field reconstruction with INLA: Application to IFU galaxy data<img  align="right" src="https://raw.githubusercontent.com/COINtoolbox/photoz_catalogues/master/images/coin.png" width="200">
 
 
-S. Gonzalez-Gaitan, [R. S. de Souza](https://github.com/RafaelSdeSouza), [A. Krone-Martins](https://github.com/algolkm), E. Cameron, P. Coelho, L. Galbany
+[S. Gonzalez-Gaitan](https://github.com/gongsale), [R. S. de Souza](https://github.com/RafaelSdeSouza), [A. Krone-Martins](https://github.com/algolkm), E. Cameron, P. Coelho, L. Galbany, E.E.O. Ishida
 
 
-This is one of the products of the fourth edition of the [COIN Residence Program](http://iaacoin.wix.com/crp2017), which took place in August/2017 in Clermont-Ferrand (France). 
+This is one of the products of [COIN Residence Program #4](http://iaacoin.wix.com/crp2017), which took place in August/2017 in Clermont-Ferrand (France). 
 
 We present here: 
 
