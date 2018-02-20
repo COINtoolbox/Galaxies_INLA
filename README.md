@@ -1,4 +1,4 @@
-# Spatial field reconstruction with INLA:  
+# [Spatial field reconstruction with INLA](https://arxiv.org/abs/1802.06280):  
 # Application to IFU galaxy data<img  align="right" src="https://raw.githubusercontent.com/COINtoolbox/photoz_catalogues/master/images/coin.png" width="200">
 
 
