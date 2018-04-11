@@ -1,4 +1,4 @@
-# [Spatial field reconstruction with INLA: Application to IFU galaxy data](https://arxiv.org/abs/1802.06280)  <img  align="right" src="https://github.com/COINtoolbox/DRACULA/blob/master/images/coin.png" width="200">
+#  <img  align="right" src="https://github.com/COINtoolbox/DRACULA/blob/master/images/coin.png" width="400"> [Spatial field reconstruction with INLA: Application to IFU galaxy data](https://arxiv.org/abs/1802.06280)
 
 
 [S. Gonzalez-Gaitan](https://github.com/gongsale), [R. S. de Souza](https://github.com/RafaelSdeSouza), [A. Krone-Martins](https://github.com/algolkm), E. Cameron, P. Coelho, L. Galbany, E.E.O. Ishida
