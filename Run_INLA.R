@@ -3,6 +3,7 @@ require(INLA)
 require(lattice)
 require(classInt)
 require(FITSio)
+require(reshape2)
 source("inla_fct.R")
 
 
@@ -42,6 +43,8 @@ cutColor <- 100
 fj5_mass <- classIntervals(massinla$out[valid], n = cutColor, style= "fisher")
 fj5_ermass <- classIntervals(massinla$outsd[valid], n = cutColor, style= "fisher")
 
+#Save as a fits file
+writeFITSim(massinla$image,file='data/NGC0309_mass_inla.fits')
 
 
 # Display original data
