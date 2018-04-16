@@ -44,13 +44,12 @@ fj5_mass <- classIntervals(massinla$out[valid], n = cutColor, style= "fisher")
 fj5_ermass <- classIntervals(massinla$outsd[valid], n = cutColor, style= "fisher")
 
 #Save as a fits file
-writeFITSim(massinla$image,file='data/NGC0309_mass_inla.fits')
+writeFITSim(massinla$out,file='data/NGC0309_mass_inla.fits')
 
 
 # Display original data
 levelplot(massinla$image,col.regions=colpal,
           cut=cutColor,at=fj5_mass$brks)
-
 
 
 # Display mean INLA output 
