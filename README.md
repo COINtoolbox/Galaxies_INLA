@@ -13,7 +13,7 @@ We present here:
 
 ### *Code snipppet to reproduce the spatial maps* 
 
-We provide a simple  [example](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/Run_INLA.R) to read the data, perform the INLA analysis and display the results.
+We provide a simple  [example](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/Run_INLA.R) to read the data, perform the INLA analysis and display the results. A simple way to *display* the results in python is shown in a small [notebook](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/read_cube.ipynb).
 
 
 ### CALIFA/PISCO Galactic Property Catalogue 
@@ -54,7 +54,7 @@ B) One invidual FITS files per galaxy, e.g. [NGC-309](https://github.com/COINtoo
 5. STARLIGHT mass-weighted log(metallicity)
 6. STARLIGHT visual extinction Av
 
-And another indiviudal FITS file per galaxy, e.g. [NGC-741](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/fits/NGC0741_inla.fits), for the respective INLA mean and dispersion:
+And another individual FITS file per galaxy, e.g. [NGC-741](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/fits/NGC0741_inla.fits), for the respective INLA mean and dispersion:
 1. INLA mean of log(mass) in solar masses
 2. INLA std deviation of log(mass) in solar masses
 3. INLA mean of luminosity-weighted log(age) in yr
