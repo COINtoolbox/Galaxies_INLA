@@ -53,6 +53,7 @@ B) One invidual FITS files per galaxy, e.g. [NGC-309](https://github.com/COINtoo
 4. STARLIGHT mass-weighted log(age) in yr
 5. STARLIGHT mass-weighted log(metallicity)
 6. STARLIGHT visual extinction Av
+
 And another indiviudal FITS file per galaxy, e.g. [NGC-741](https://github.com/COINtoolbox/Galaxies_INLA/blob/master/data/fits/NGC0741_inla.fits), for the respective INLA mean and dispersion:
 1. INLA mean of log(mass) in solar masses
 2. INLA std deviation of log(mass) in solar masses
