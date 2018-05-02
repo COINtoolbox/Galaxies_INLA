@@ -84,10 +84,10 @@ if(shape == 'radius'){
                                                     xlim=c(xini,xfin),ylim=c(yini,yfin),
                                                     dim=zoom*c(xsize+1,ysize+1)),
                                 res$summary.random$i$mean)+
-        matrix(as.numeric(res$summary.fixed$mean[1]+
+        t(matrix(as.numeric(res$summary.fixed$mean[1]+
                            res$summary.fixed$mean[2]*projected_radius+
                            res$summary.fixed$mean[3]*projected_radius_2),
-               nrow=zoom*(xsize+1),ncol=zoom*(ysize+1))
+               nrow=zoom*(ysize+1),ncol=zoom*(xsize+1)))
     
     #output std with simple (no function)
     outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(xini,xfin),
@@ -130,10 +130,10 @@ else if(shape=='ellipse') {
                                                     xlim=c(xini,xfin),ylim=c(yini,yfin), #ch
                                                     dim=zoom*c(xsize+1,ysize+1)),#ch
                                 res$summary.random$i$mean)+
-        matrix(as.numeric(res$summary.fixed$mean[1]+
+       t(matrix(as.numeric(res$summary.fixed$mean[1]+
                             res$summary.fixed$mean[2]*projected_ellipse+
                             res$summary.fixed$mean[3]*projected_ellipse_2),
-                 nrow=zoom*(xsize+1),ncol=zoom*(ysize+1))#chan
+                 nrow=zoom*(ysize+1),ncol=zoom*(xsize+1)))#chan
 
     #output std with simple (no function)
     outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(xini,xfin),
@@ -157,7 +157,7 @@ else if(shape=='none') {
     #output
     output <- inla.mesh.project(inla.mesh.projector(mesh,
 	   xlim=c(xini,xfin),ylim=c(yini,yfin),dim=zoom*c(xsize+1,ysize+1)),res$summary.random$i$mean)+
-        matrix(as.numeric(res$summary.fixed$mean[1]),nrow=zoom*(xsize+1),ncol=zoom*(ysize+1))
+        t(matrix(as.numeric(res$summary.fixed$mean[1]),nrow=zoom*(ysize+1),ncol=zoom*(xsize+1)))
     
     #output std with simple (no function)
     outputsd <- inla.mesh.project(inla.mesh.projector(mesh,xlim=c(xini,xfin),ylim=c(yini,yfin),dim=c(xsize+1,ysize+1)),res$summary.random$i$sd)
