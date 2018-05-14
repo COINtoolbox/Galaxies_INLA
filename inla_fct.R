@@ -28,7 +28,7 @@ if (hasArg(tepar)) { epar <- tepar^2 } else { epar <- NULL}
 # Create a mesh (tesselation) 
 mesh <- inla.mesh.2d(cbind(x,y), max.n = 10, cutoff = cutoff)
 
-#bookkeeeping
+#bookkeeping
 A <- inla.spde.make.A(mesh, loc=cbind(x,y))
 
 #calculate projection from model
@@ -68,12 +68,12 @@ if(shape == 'radius'){
                           effects=list(i=1:spde$n.spde, m=rep(1,length(x)),
                                        radius=radius, radius_2=radius_2),tag='est')
  
-     #caculate result model
+    #calculate result model
     res <- inla(par ~ 0 + m +radius +radius_2 +f(i, model=spde),
                 data=inla.stack.data(stk_rad),
                 control.predictor=list(A=inla.stack.A(stk_rad)),scale=epar)
 
-     #porjection for radius
+    #projection for radius
     projected_radius <- sqrt((rep(projection$x,each=length(projection$y))-xcenter)^2 +
                              (rep(projection$y,length(projection$x)) -ycenter)^2)
     projected_radius_2  <- (rep(projection$x,each=length(projection$y))-xcenter)^2 +
@@ -110,15 +110,15 @@ else if(shape=='ellipse') {
                           effects=list(i=1:spde$n.spde,
                                        m=rep(1,length(x)),ellipse=ellipse,
                                        ellipse_2=ellipse_2),tag='est')
-    #caculate result model
+    #calculate result model
     res <- inla(par ~ 0 + m +ellipse +ellipse_2 +f(i, model=spde),
                 data=inla.stack.data(stk_ell),
                 control.predictor=list(A=inla.stack.A(stk_ell)),scale=epar)
 
-    #print restuls
+    #print results
     #print(res_rad$summary.fix)
 
-    #prjection for ellipse
+    #projection for ellipse
     px = rep(projection$x,each=length(projection$y))
     py = rep(projection$y,length(projection$x))
     projected_ellipse <- (cbind(px-xcenter,py-ycenter)%*%(eigens$vectors[,1]))^2/eigens$values[1] +
@@ -151,7 +151,7 @@ else if(shape=='none') {
     res <- inla(par ~ 0 + m  +f(i, model=spde),
 	data=inla.stack.data(stk), control.predictor=list(A=inla.stack.A(stk)),
 	scale=epar)
-    #print restuls
+    #print results
     #res_rad$summary.fix
 
     #output
@@ -250,7 +250,7 @@ output <- t(matrix(as.numeric(res$summary.fitted.values$mean),nrow=xsize+1,ncol=
 outputsd <- t(matrix(as.numeric(res$summary.fitted.values$sd),nrow=xsize+1,ncol=ysize+1))
 
 
-##chec radial nonpar fct
+##check radial nonpar fct
 #plot(res$summary.random$i$ID,res$summary.random$i$mean)
 
 
